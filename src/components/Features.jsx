@@ -1,6 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Features({handleSearch}) {
+function Features({handleSearch, handleRegion}) {
+    const [regions, setRegions] = useState([]);
+
+    useEffect(()=>{
+        fetch('https://restcountries.com/v3.1/all?fields=region')
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          const hasil = uniqueRegion(data);
+          console.log(hasil);
+          setRegions(hasil)
+    
+          
+        });
+    },[])
+
+  
+  function handleChange(e) {
+    alert(e.target.value)
+  }
+
+  function uniqueRegion (array) {
+    let uniqueSet = new Set(array.map(item => JSON.stringify(item)));
+    let uniqueArray = Array.from(uniqueSet).map(item => JSON.parse(item));
+    let hasil = uniqueArray.sort((a, b) => a.region.localeCompare(b.region));
+    return hasil;
+  }
   return (
     <div className='flex flex-wrap gap-y-5 justify-between  mt-8 mb-10'>
         <div className='basis-full sm:basis-2/6 border-1 '>
@@ -11,15 +39,16 @@ function Features({handleSearch}) {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                 </svg>
             </div>
-            <input type="search" id="default-search" className="block w-full p-3 ps-14 text-sm text-gray-900 border border-gray-300 rounded-md " placeholder="Search for a country" required onChange={handleSearch} />
+            <input type="search" id="default-search" className="block w-full p-3 ps-14  text-gray-900 border border-gray-300 rounded-md " placeholder="Search for a country" required onChange={handleSearch} />
            
         </div>
         </div>
         <div className='basis-2/3 sm:basis-1/3 sm:text-end'>
-        <select id="currency" name="currency" className="h-full shadow border rounded py-2 px-3 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm text-black" placeholder="Filter by Region">
-            <option value="" disabled selected>Select by Region</option>
-            <option>CAD</option>
-            <option>EUR</option>
+        <select id="currency" name="currency" className="h-full shadow border rounded py-2 px-3 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm text-black" onChange={handleRegion} >
+            <option value=""  selected>Select by Region</option>
+            {regions != 0 && regions.map((reg, index) => <option key={index} value={reg.region}>{reg.region}</option>)}
+           
+            {/* <option>EUR</option> */}
         </select>
         </div>
 

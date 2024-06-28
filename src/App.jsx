@@ -7,6 +7,7 @@ import Detail from './views/Detail'
 import Navbar from './components/Navbar';
 import NotFound from './views/NotFound';
 import Memo from './views/Memo';
+import Pagination from './views/Pagination';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/memo" element={<Memo />} />
+          <Route path="/pagination" element={<Pagination />} />
           <Route path='*' element={<NotFound />} />
           {/* <Route path="/contact" element={<Contact />} /> */}
         </Routes>
