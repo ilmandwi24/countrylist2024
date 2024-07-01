@@ -26,7 +26,8 @@
   }
 
   .bgElement {
-    @apply bg-elements-light dark:bg-elements-dark
+    @apply bg-elements-light dark:bg-elements-dark;
+    @apply text-main-light dark:text-main-dark;
   }
   
 }

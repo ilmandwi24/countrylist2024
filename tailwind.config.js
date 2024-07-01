@@ -17,9 +17,14 @@ export default {
         },
         elements:{
           light: 'var(--light-mode-elements)',
-          dark: 'var(--dark-mode-elements)',
+          dark: 'var(--dark-mode-elements)'
         }
-       
+      },
+      textColor: {
+        main:{
+          light: 'var(--light-mode-text)',
+          dark:'var(--dark-mode-text)'
+        }
       }
     },
   },
