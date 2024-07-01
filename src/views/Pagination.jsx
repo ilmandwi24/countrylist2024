@@ -36,7 +36,7 @@ const data = [
 export default function App() {
   const [page, setPage] = useState(0);
   const [filterData, setFilterData] = useState();
-  const n = 3;
+  const n = 5;
 
   useEffect(() => {
     setFilterData(

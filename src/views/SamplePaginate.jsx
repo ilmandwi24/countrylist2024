@@ -8,7 +8,7 @@ import ReactPaginate from "react-paginate";
 import { AiFillLeftCircle, AiFillRightCircle } from "react-icons/ai";
 
 
-function Home() {
+function SamplePaginate() {
   const [countries, setCountries] = useState([]);
   const [jumlahData, setJumlahData] = useState(0);
   const [selectRegion, setSelectRegion] = useState('')
@@ -16,7 +16,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const pageRef = useRef(null);
 
-  const n = 8;
+  const n = 6;
   const [page, setPage] = useState(0);
 
   useEffect(()=>{
@@ -36,7 +36,15 @@ function Home() {
 
   },[]);
 
-  
+  // const filteredCountries = useMemo(() => (
+  //     countries.filter((country) =>
+  //     country.name.common.toLowerCase().includes(search.toLowerCase())
+  //     )
+  //     // console.log("memo", regions);
+  // ),
+  //   [countries, search]
+   
+  // );
   const filteredCountries = useMemo(() => {
     
     console.log("memo", selectRegion);
@@ -62,25 +70,64 @@ function Home() {
 
 
   function handleSearch(e) {
+    // const pagination = document.querySelector('.pagination');
+
+    // // Find the index of the active 'page-item' element
+    // const activeIndex = Array.from(pagination.querySelectorAll('.page-item')).findIndex(item => item.classList.contains('active'));
     
+    // // Remove the 'active' class from the active element
+    // if(activeIndex !=0){
+    //     pagination.querySelector('.page-item.active').classList.remove('active');
+    // }
+    
+    // Output the index of the active element (if needed)
+    // console.log('Index of active element:', activeIndex);
   
     setPage(0)
-    
+    // setSelectRegion(e.target.value)
     setSearch(e.target.value);
     
-    
+    // setPage(0)
     
     console.log(e.target.value)
 
-    
+    // const filteredItems = countries.filter((country) =>
+    //   country.name.common.toLowerCase().includes(search.toLowerCase())
+    //   );
+
+    // setCountries(filteredItems)
   }
 
   function handleRegion(e){
     console.log(e.target.value)
     console.log(page)
+    // setPage(0)
+    // const pagination = document.querySelector('.pagination');
+
+    // // Find the index of the active 'page-item' element
+    // const activeIndex = Array.from(pagination.querySelectorAll('.page-item')).findIndex(item => item.classList.contains('active'));
     
+    // // Remove the 'active' class from the active element
+    // if(activeIndex !=0){
+    //     pagination.querySelector('.page-item.active').classList.remove('active');
+    // }
+    
+    // Output the index of the active element (if needed)
+    // console.log('Index of active element:', activeIndex);
+  
     setPage(0)
     setSelectRegion(e.target.value)
+    // Remove the 'active' class from the found element
+    
+  //   
+    
+  //   const pageItems = pagination.querySelectorAll('.page-item');
+
+  //   if (pageItems.length > 1) {
+  //     pageItems[0].classList.add('active');
+  // }
+    
+   
     
   }
 
@@ -141,4 +188,4 @@ function Home() {
   )
 }
 
-export default Home
+export default SamplePaginate
