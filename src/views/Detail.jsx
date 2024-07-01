@@ -8,6 +8,7 @@ function Detail() {
   
   const [country, setCountry] = useState({});
   const [mataUang, setMataUang] = useState('');
+  const [negaraPerbatasan, setNegaraPerbatasan] = useState();
   const [bahasa, setBahasa] = useState([]);
   const [loading, setLoading] = useState(false); 
 
@@ -34,7 +35,20 @@ function Detail() {
       let bahasaData = await getBahasa(data[0].languages)
       setMataUang(curr[0].name);
       setBahasa(bahasaData);
-      console.log(mataUang);
+
+      // FETCH CCA3
+      let dataCca = await fetch(`https://restcountries.com/v3.1/all?fields=name,cca3`).then(res => {
+        return res.json();
+      });
+      const dataBaruCca = data[0].borders.map((b)=>{
+        const filteredData = dataCca.filter(item => item.cca3 === b);
+        // filteredData ? console.log(filteredData[0].name.common, "ada" ,b) : console.log("kosong",b)
+        if (filteredData ) return filteredData[0].name.common ;
+        return null;
+      })
+      setNegaraPerbatasan(dataBaruCca)
+    
+      console.log("border",data[0].borders);
       console.log(bahasa);
     } 
     fetchData();
@@ -61,16 +75,16 @@ function Detail() {
   // }
   
   return (
-    <div className='bg-main-light px-8 py-7 md:px-20'>
+    <div className='bgMain textMain px-8 py-7 md:px-20'>
       <div className='mb-5 md:my-14'>
         <Link to="/">
-        <button className='inline-flex content-center  items-center gap-2 px-6 py-2 shadow-md bg-slate-100'><PiArrowLeftBold />Back</button>
+        <button className='inline-flex content-center items-center gap-2 px-6 py-2 shadow-md bgElements'><PiArrowLeftBold />Back</button>
         </Link>
       </div>
       <div className='mt-10'>
         {Object.keys(country).length == 0 ? "loading data" : country.status==404 ? "Tidak ditemukan" :(<div className='flex flex-wrap'>
           <div className='basis-full md:basis-5/12'>
-            <img class=" bg-blue-100 border-3 shadow-lg " src={country[0].flags.svg} alt="Sunset in the mountains"/>
+            <img className=" bg-blue-100 border-3 shadow-lg " src={country[0].flags.svg} alt="Sunset in the mountains"/>
 
           </div>
           <div className='flex flex-col gap-5 mt-5 basis-full md:basis-7/12 md:px-32'>
@@ -93,12 +107,12 @@ function Detail() {
               </div>
             </div>
             <div className='flex flex-wrap'>
-              <div className='basis-full md:basis-1/3 flex items-center'>
+              <div className='basis-full md:basis-1/3 flex items-start'>
 
                <h4 className='mt-2'>Border Countries</h4>
               </div>
               <div className='inline-flex gap-3 basis-full md:basis-1/2 mt-2 text-sm flex-wrap'>
-                {country[0].borders.map(b=>(<span className=' text-center shadow-md py-1 px-3'>{b}</span>))}
+                {negaraPerbatasan && negaraPerbatasan.map(b=>(<span className=' text-center shadow-md py-1 px-3'>{b}</span>))}
                 
         
               </div>

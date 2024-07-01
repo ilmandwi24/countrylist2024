@@ -17,8 +17,11 @@
 
 
 @layer base {
+  
+
   body {
     font-family: "Nunito Sans", sans-serif;
+    @apply bg-main-light dark:bg-main-dark;
   }
 
   .bgMain{
@@ -28,6 +31,34 @@
   .bgElement {
     @apply bg-elements-light dark:bg-elements-dark;
     @apply text-main-light dark:text-main-dark;
+  }
+
+  .textMain {
+    @apply text-main-light dark:text-main-dark;
+  }
+
+  .select-wrapper{
+    position: relative;
+  }
+  .select-wrapper::after {
+    content: "▼";
+    color:white;
+    font-size: 0.8rem;
+    top: 15px;
+    right: 8px;
+    position: absolute;
+  }
+
+  @media screen and (max-width: 640px) {
+    .select-wrapper::after {
+      content: "▼";
+      color:white;
+      font-size: 0.75rem;
+      top: 12px;
+      right: 5.5px;
+      
+    }
+    
   }
   
 }

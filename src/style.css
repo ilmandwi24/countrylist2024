@@ -18,12 +18,16 @@
     margin-top: 20px;
     margin-bottom: 30px;
     cursor: pointer;
+    @apply text-main-light dark:text-main-dark;
+    
   }
   
   .active {
-    background-color: #1e50ff;
+    /* background-color: #1e50ff; */
+    @apply bg-elements-dark dark:bg-elements-light;
+    @apply text-main-dark dark:text-main-light;
     border-radius: 50%;
-    color: aliceblue;
+    
     pointer-events: none;
   }
 
@@ -38,5 +42,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 2px;
+    
+    
   }
   

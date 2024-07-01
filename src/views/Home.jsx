@@ -88,12 +88,12 @@ function Home() {
 
   
   return (
-    <div className='bg-main-light px-5 py-5  md:px-20 h-screen'>
+    <div className=' px-5 py-3  md:px-20 h-screen bgMain'>
       <Features handleSearch={handleSearch} handleRegion={handleRegion}  />
       {/* {search} */}
       <div className='my-6 px-7 sm:px-0 grid sm:grid-cols-3 lg:grid-cols-4 gap-11'>
       
-      {isLoading ? "loading data" : filteredCountries.length ==0 ? <div className='text-xl md:text-3xl font-bold uppercase text-orange-700 col-span-4 my-10 '><div className='w-full items-center flex flex-col gap-3'>
+      {isLoading ? "loading data" : filteredCountries.length ==0 ? <div className='text-xl md:text-3xl font-bold uppercase bgElements textMain col-span-4 my-10 '><div className='w-full items-center flex flex-col gap-3'>
         <IoIosWarning size={45} />COUNTRY NOT FOUND</div></div> : filteredCountries.map((country,index)=>(<Card country={country} key={index}/>))}
         
       </div>

@@ -28,7 +28,8 @@ export default {
       }
     },
   },
-  // darkMode:'class',
+  darkMode:'class',
+  // darkMode: ['selector', '[data-mode="dark"]'],
   plugins: [],
 }
 
